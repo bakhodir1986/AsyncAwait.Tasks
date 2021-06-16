@@ -72,7 +72,6 @@ namespace AsyncAwait.Task1.CancellationTokens
                 CalculateSum(nx);
             }
 
-            Console.WriteLine("Enter N: ");
         }
 
         private static async Task Calculate(int n, CancellationTokenSource tokenSource)
