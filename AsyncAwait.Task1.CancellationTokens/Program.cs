@@ -29,7 +29,7 @@ namespace AsyncAwait.Task1.CancellationTokens
             Console.WriteLine("Enter N: ");
 
             string input = Console.ReadLine();
-            while (input.Trim().ToUpper() != "Q")
+            while (input != null && input.Trim().ToUpper() != "Q")
             {
                 if (int.TryParse(input, out int n))
                 {
@@ -50,7 +50,6 @@ namespace AsyncAwait.Task1.CancellationTokens
 
         private static void CalculateSum(int n)
         {
-            // todo: make calculation asynchronous
             var tokenSource = new CancellationTokenSource();
             CancellationToken token = tokenSource.Token;
 
