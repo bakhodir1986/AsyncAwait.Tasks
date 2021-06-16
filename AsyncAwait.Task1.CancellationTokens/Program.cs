@@ -51,15 +51,8 @@ namespace AsyncAwait.Task1.CancellationTokens
         private static void CalculateSum(int n)
         {
             var tokenSource = new CancellationTokenSource();
-            CancellationToken token = tokenSource.Token;
 
-            Task<long> sumTask = Calculator.Calculate(n , token);
-
-            sumTask.ContinueWith((taskCalc) => {
-
-                Console.WriteLine($"Sum for {n} = {taskCalc.Result}.");
-
-            }, TaskContinuationOptions.OnlyOnRanToCompletion);
+            var sumTask = Calculate(n, tokenSource);
 
             Console.WriteLine();
            
@@ -77,11 +70,18 @@ namespace AsyncAwait.Task1.CancellationTokens
                 }
 
                 CalculateSum(nx);
-
-                n = nx;
             }
 
             Console.WriteLine("Enter N: ");
+        }
+
+        private static async Task Calculate(int n, CancellationTokenSource tokenSource)
+        {
+            var token = tokenSource.Token;
+
+            var sum = await Calculator.Calculate(n, token);
+
+            Console.WriteLine($"Sum for {n} = {sum}.");
         }
     }
 }
