@@ -19,9 +19,9 @@ namespace AsyncAwait.Task2.CodeReviewChallenge.Models.Support
         {
             try
             {
-                await _supportService.RegisterSupportRequestAsync(requestInfo);
+                await _supportService.RegisterSupportRequestAsync(requestInfo).ConfigureAwait(false);
 
-                return await _supportService.GetSupportInfoAsync(requestInfo);
+                return await _supportService.GetSupportInfoAsync(requestInfo).ConfigureAwait(false);
             }
             catch (HttpRequestException ex)
             {
